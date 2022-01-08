@@ -18,7 +18,7 @@ public class Movie implements Serializable {
     @Column(name = "external_id" )
     private String external_id;
 
-    @OneToMany(mappedBy="Movie")
+    @OneToMany(mappedBy="movie")
     private Set<SeenMovie> seen_movies;
 
     public String getTitle() {

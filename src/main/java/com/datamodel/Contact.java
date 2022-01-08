@@ -3,12 +3,17 @@ package com.datamodel;
 import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "Contact")
 public class Contact {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
     private User user;
+    @OneToOne
+    private Address address;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "birthDay", nullable = false)
@@ -56,5 +61,21 @@ public class Contact {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

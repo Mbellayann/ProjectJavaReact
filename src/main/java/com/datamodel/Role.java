@@ -1,16 +1,14 @@
 package com.datamodel;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
-enum ERole {
-    ROLE_USER,
-    ROLE_MODERATOR,
-    ROLE_ADMIN
-}
+
 
 @Entity
 @Table(name = "roles")
-public class Role {
+public class Role implements Serializable {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

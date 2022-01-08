@@ -18,13 +18,17 @@ public class SeenMovie implements Serializable {
     private Movie movie;
 
     @ManyToOne
-    @JoinColumn(name="Users", nullable=false)
+    @JoinColumn(name="user_id", nullable=false)
     private User user;
 
     public SeenMovie(Date dateSeen, Movie movie, User user) {
         this.dateSeen = dateSeen;
         this.movie = movie;
         this.user = user;
+    }
+
+    public SeenMovie() {
+
     }
 
     public Date getDateSeen() {
