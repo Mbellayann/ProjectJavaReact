@@ -44,4 +44,20 @@ public class Movie implements Serializable {
     public void setExternal_id(String external_id) {
         this.external_id = external_id;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Set<SeenMovie> getSeen_movies() {
+        return seen_movies;
+    }
+
+    public void setSeen_movies(Set<SeenMovie> seen_movies) {
+        this.seen_movies = seen_movies;
+    }
 }

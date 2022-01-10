@@ -1,11 +1,9 @@
 package com.controller;
 
-import com.datamodel.ERole;
 import com.datamodel.Role;
 import com.datamodel.User;
 import com.dataservice.RoleService;
-import com.dataservice.UserIpml;
-import com.dataservice.UserService;
+import com.dataservice.UserServiceImpl;
 import com.dto.UserDto;
 import com.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +19,14 @@ import java.util.Set;
 public class UserController {
 
     @Autowired
-    private IUserRepository iUserRepository;
-
-    @Autowired
     private RoleService roleService;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
     @GetMapping(value ="/users")
     public ResponseEntity <List<User>> getUsers(){
-        return ResponseEntity.ok().body(iUserRepository.findAll());
+        return ResponseEntity.ok().body(userServiceImpl.getUsers());
     }
 
     @PostMapping(value = "/users")
@@ -43,6 +38,6 @@ public class UserController {
         User user = userDto.MapUser();
         System.out.println(user);
         user.setRoles(listRoles);
-        return userService.create(user);
+        return userServiceImpl.SaveUser(user);
     }
 }
