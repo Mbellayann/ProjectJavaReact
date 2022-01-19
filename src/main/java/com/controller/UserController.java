@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,11 +26,13 @@ public class UserController {
     private UserServiceImpl userServiceImpl;
 
     @GetMapping(value ="/users")
+    @RolesAllowed("admin")
     public ResponseEntity <List<User>> getUsers(){
         return ResponseEntity.ok().body(userServiceImpl.getUsers());
     }
 
     @PostMapping(value = "/users")
+    @RolesAllowed("admin")
     public User createUsers(@RequestBody UserDto userDto){
         Set<Role> listRoles = new HashSet<>();
         userDto.getRoles().forEach(role ->{

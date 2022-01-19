@@ -18,8 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@Configuration
-@EnableWebSecurity
+
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -38,15 +37,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeHttpRequests()
-                .antMatchers(HttpMethod.GET, "/api/users/**")
-                .hasAnyAuthority("ROLE_USER");
+                .antMatchers(HttpMethod.GET, "/api/users").permitAll();
         http.authorizeHttpRequests()
                 .antMatchers(HttpMethod.POST, "/api/users/**")
                 .hasAnyAuthority("ROLE_USER");
         http.authorizeHttpRequests()
                 .antMatchers( "/login/**")
                 .permitAll();
-        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
+        //http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
