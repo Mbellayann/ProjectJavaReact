@@ -22,6 +22,10 @@ public class Address implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    public Address() {
+        
+    }
+
     public String getCountry() {
         return country;
     }
@@ -68,5 +72,13 @@ public class Address implements Serializable {
 
     public Long getId() {
         return id;
+    }
+
+    public Address(String country, String area, String city, String street, String number) {
+        this.country = country;
+        this.area = area;
+        this.city = city;
+        this.street = street;
+        this.number = number;
     }
 }

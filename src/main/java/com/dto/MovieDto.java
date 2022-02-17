@@ -8,7 +8,7 @@ public class MovieDto {
     private Date added;
     private String external_id;
 
-    public Movie MapUser(){
+    public Movie MapMovie(){
         Movie movie = new Movie();
         movie.setTitle(this.title);
         movie.setAdded(this.added);

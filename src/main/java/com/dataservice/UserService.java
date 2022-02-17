@@ -10,4 +10,5 @@ public interface UserService {
     void AddRoleToUser(String username, ERole role);
     User getUser(String username);
     List<User>getUsers();
+    boolean Checking(User user, String password);
 }

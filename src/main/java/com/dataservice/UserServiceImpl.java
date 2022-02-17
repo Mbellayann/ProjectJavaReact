@@ -10,12 +10,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -47,7 +49,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User SaveUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10)));
         return iUserRepository.save(user);
     }
 
@@ -68,5 +70,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return iUserRepository.findAll();
     }
 
-
+    @Override
+    public boolean Checking(User user, String password) {
+        if (user != null) {
+            // If the passwords match it will return true, otherwise false
+            return BCrypt.checkpw(password, user.getPassword());
+        }
+        else return false;
+    }
 }
