@@ -23,7 +23,7 @@ public class Address implements Serializable {
     private Long id;
 
     public Address() {
-        
+
     }
 
     public String getCountry() {
